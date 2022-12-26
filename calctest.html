@@ -1,0 +1,103 @@
+<html>
+  <head>
+    <title>Calculator App</title>
+    <meta charset="utf-8">
+    <style>
+      body {
+        background-color: #f2f2f2;
+        font-size: 16px;
+        margin-left: 10;
+        }
+
+        form {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        }
+
+        label {
+        color: #333;
+        font-weight: bold;
+        }
+
+        input[type="number"] {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 14px;
+        height: 40px;
+        }
+
+        button {
+        background-color: #0077c9;
+        border: 0;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 12px 20px;
+        margin-top: 10px;
+        }
+
+        button:hover {
+        background-color: #005fa3;
+        }
+
+        #result {
+        color: #333;
+        font-size: 18px;
+        margin-top: 20px;
+        }
+    </style>
+  </head>
+  <body>
+    <!-- Add your HTML content here -->
+    <h1>Leverage Kalkulator</h1>
+    <p>Unesite 3 potrebna podatka kako bi izračunali potreban ulog </p>
+    <form id="calculator-form">
+      <label for="first_num">Željeni gubitak ($):</label><br>
+      <input type="text" id="first_num"><br>
+      <label for="second_num">Stop loss (%) :</label><br>
+      <input type="text" id="second_num"><br>
+      <label for="third_num">Leverage (x):</label><br>
+      <input type="text" id="third_num"><br>
+      <button type="submit">Izračunaj potreban ulog</button>
+    </form>
+    <p id="result"></p>
+    
+    <!-- Add your JavaScript code here -->
+    <script>
+      // Function to calculate the result of the formula first_num/(second_num/100) * third_num
+      function calculateResult(first_num, second_num, third_num) {
+        // Calculate the result of the formula
+        let result = first_num/(second_num/100 * third_num);
+        result = result.toFixed(2);
+        // Return the result
+        return result;
+      }
+
+      // Get a reference to the form element
+      let form = document.getElementById("calculator-form");
+
+      // Add an event listener to the form to listen for submit events
+      form.addEventListener("submit", function(event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+
+        // Read in the 3 input values
+        let first_num = parseFloat(document.getElementById("first_num").value);
+        let second_num = parseFloat(document.getElementById("second_num").value);
+        let third_num = parseFloat(document.getElementById("third_num").value);
+
+        // Calculate the result using the function
+        let result = calculateResult(first_num, second_num, third_num);
+
+        // Update the result element with the calculated result
+        document.getElementById("result").innerHTML = "Potreban ulog: " + result;
+      });
+    </script>
+  </body>
+</html>
